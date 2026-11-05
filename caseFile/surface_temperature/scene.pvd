@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<VTKFile type="Collection" version="0.1">
+<Collection>
+<DataSet timestep="0.0" group="" part="0" file="frame_0000.vtk"/>
+<DataSet timestep="1.0" group="" part="0" file="frame_0100.vtk"/>
+<DataSet timestep="2.0" group="" part="0" file="frame_0200.vtk"/>
+<DataSet timestep="3.0" group="" part="0" file="frame_0300.vtk"/>
+<DataSet timestep="4.0" group="" part="0" file="frame_0400.vtk"/>
+<DataSet timestep="5.0" group="" part="0" file="frame_0500.vtk"/>
+<DataSet timestep="6.0" group="" part="0" file="frame_0600.vtk"/>
+<DataSet timestep="7.0" group="" part="0" file="frame_0700.vtk"/>
+<DataSet timestep="8.0" group="" part="0" file="frame_0800.vtk"/>
+<DataSet timestep="9.0" group="" part="0" file="frame_0900.vtk"/>
+<DataSet timestep="10.0" group="" part="0" file="frame_1000.vtk"/>
+<DataSet timestep="11.0" group="" part="0" file="frame_1100.vtk"/>
+<DataSet timestep="12.0" group="" part="0" file="frame_1200.vtk"/>
+<DataSet timestep="13.0" group="" part="0" file="frame_1300.vtk"/>
+</Collection>
+</VTKFile>

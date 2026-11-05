@@ -1,0 +1,226 @@
+{
+  "building": {
+    "max_shift_frac_of_site_diameter": 1.0,
+    "snap_step_m": null,
+    "overlap_tol_m2": 0.001,
+    "min_shift_frac_of_length": 0.5
+  },
+  "tree": {
+    "radius_range_m": [
+      1.0,
+      6.0
+    ],
+    "canopy_gap_factor": 1.1,
+    "building_clearance_factor": 1.1,
+    "building_clearance_extra_frac_of_width": 0.0,
+    "clearance_applies_to_osm": true,
+    "height_open_m": [
+      12.0,
+      15.0
+    ],
+    "height_near_building_m": [
+      8.0,
+      10.0
+    ],
+    "height_pathway_m": [
+      8.0,
+      12.0
+    ],
+    "tree_on_pathway_allowed": false,
+    "near_building_distance_m": 10.0,
+    "max_count_factor": 1.5,
+    "pathway_zone_distance_m": 6.0,
+    "create_if_missing": true,
+    "canopy_cover_frac_if_missing": 0.1,
+    "template": {
+      "height": 7,
+      "crownDiameter": 4,
+      "dimensions": {
+        "trunkHeight": 2.8000000000000003,
+        "trunkRadius": 0.3,
+        "crownHeight": 4.2,
+        "crownRadius": 2,
+        "totalHeight": 7,
+        "crownDiameter": 4
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 12.566370614359172,
+        "volume": 34.30200298699575
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    "pathway_planting": {
+      "enabled": true,
+      "spacing_m": 10.0,
+      "radius_range_m": [
+        2.0,
+        4.0
+      ],
+      "canopy_gap_to_path_m": 0.5,
+      "fill_fraction_range": [
+        0.6,
+        1.0
+      ],
+      "max_new_trees": 260,
+      "slide_tries_m": [
+        0.0,
+        1.5,
+        -1.5,
+        3.0,
+        -3.0
+      ]
+    },
+    "max_dropped_trees": 3,
+    "trunk_height_frac": 0.4,
+    "trunk_radius_m": 0.3,
+    "move_sigma_m": 15.0,
+    "relocate_probability": 0.25,
+    "resize_sigma_m": 2.0,
+    "new_tree_radius_range_m": [
+      1.5,
+      4.0
+    ],
+    "size_step_m": 0.5
+  },
+  "pond": {
+    "max_patches": 4,
+    "min_area_m2": 25.0,
+    "area_factor_range": [
+      1.0,
+      1.1
+    ],
+    "create_if_missing": true,
+    "open_space_frac_if_missing": 0.3,
+    "default_depth_m": 2.0,
+    "template": {
+      "material": {
+        "thermal_conductivity": 0.6,
+        "density": 1000,
+        "specific_heat": 4186,
+        "surface_roughness": 0.0001,
+        "albedo": 0.06
+      }
+    }
+  },
+  "lawn": {
+    "max_patches": 6,
+    "min_area_m2": 25.0,
+    "area_factor_range": [
+      1.0,
+      1.1
+    ],
+    "create_if_missing": true,
+    "open_space_frac_if_missing": 0.3,
+    "water_available_l_per_day": 50000,
+    "template": {
+      "material": {
+        "leaf_area_index": 3,
+        "height": 0.3,
+        "transpiration_rate": 0.5,
+        "surface_roughness": 0.05,
+        "albedo": 0.25
+      }
+    }
+  },
+  "zones": {
+    "pathway": [],
+    "default_pathway_width_m": 6.0
+  },
+  "patch": {
+    "largest_open_rank_probs": [
+      0.8,
+      0.2
+    ],
+    "edge_margin_m": 0.25,
+    "rays": 360,
+    "min_width_m": 4.0,
+    "shift_sigma_m": 20.0,
+    "rotate_sigma_deg": 60.0,
+    "stretch_sigma": 0.5,
+    "scale_sigma": 0.3,
+    "jitter_sigma_frac": 0.15,
+    "new_patch_share_range": [
+      0.15,
+      0.45
+    ],
+    "new_patch_aspect_range": [
+      1.0,
+      3.0
+    ],
+    "new_patch_vertices": 12
+  },
+  "ops": {
+    "category_weights": {
+      "building": 0.25,
+      "tree": 0.4,
+      "pond": 0.15,
+      "lawn": 0.2
+    },
+    "tree_weights": {
+      "move": 0.4,
+      "resize": 0.3,
+      "add": 0.25,
+      "remove": 0.0
+    },
+    "patch_weights": {
+      "shift": 0.3,
+      "rotate": 0.1,
+      "stretch": 0.15,
+      "scale": 0.15,
+      "jitter": 0.1,
+      "add": 0.12,
+      "remove": 0.08
+    }
+  },
+  "novelty": {
+    "enabled": true,
+    "min_building_shift_m": 10.0,
+    "min_tree_changes": 30,
+    "min_patch_change_frac": 0.2
+  },
+  "generation": {
+    "all_buildings_move": true,
+    "tree_count_increase_frac": 0.1,
+    "tree_relocate_fraction": 0.25,
+    "tree_resize_fraction": 0.5,
+    "normalize_tree_heights": true,
+    "min_shift_relax_steps": [
+      1.0,
+      0.5,
+      0.25
+    ],
+    "building_attempts": 6,
+    "min_extra_ops": {
+      "pond": 1,
+      "lawn": 1
+    },
+    "attempts": 6
+  },
+  "tol": 1e-06
+}

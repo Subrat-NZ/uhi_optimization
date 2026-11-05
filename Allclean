@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm input/{individual*,offspring_*,top5_*} jsons/weather.json
+rm -r output/* results/*
+rm -r replay/*
+rm -r run/*

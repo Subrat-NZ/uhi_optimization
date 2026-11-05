@@ -1,0 +1,79 @@
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets / credentials (never commit)
+.env
+.env.*
+*.pem
+*.key
+*.secret
+credentials*
+secrets*
+.aws/
+.ssh/
+
+# Editor / OS / tool folders
+.vscode/
+.vscode-server/
+.idea/
+.cursor/
+.claude/
+.claude.json
+.codex/
+.copilot/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs and temp
+*.log
+*.tmp
+nohup.out
+.cache/
+.npm/
+node_modules/
+
+# OpenFOAM case output (regenerable, usually huge)
+processor*/
+postProcessing/
+VTK/
+log.*
+*.foam
+[1-9]*/
+!0/
+!0.orig/
+constant/polyMesh/
+constant/triSurface/*.stl
+constant/triSurface/*.obj
+*.OpenFOAM
+*.vtk
+*.vtu
+*.vtp
+
+# Big data / archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.epw
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pkl
+*.parquet
+
+# OpenFOAM build artifacts / backups
+**/Make/linux*/
+*.o
+*.dep
+*.so
+*.bak

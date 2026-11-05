@@ -1,0 +1,133 @@
+#!/bin/bash
+cd ${0%/*} || exit 1
+
+# Source OpenFOAM from an already configured environment, the cluster image,
+# or the development installation.
+OF_BASHRC="${WM_PROJECT_DIR:+$WM_PROJECT_DIR/etc/bashrc}"
+if [ -z "$OF_BASHRC" ]; then
+    for candidate in /opt/openfoam8/etc/bashrc /home/subratmcd/Softwares/OpenFOAM-8/etc/bashrc; do
+        if [ -f "$candidate" ]; then
+            OF_BASHRC="$candidate"
+            break
+        fi
+    done
+fi
+if [ ! -f "$OF_BASHRC" ]; then
+    echo "ERROR: OpenFOAM bashrc not found" >&2
+    exit 1
+fi
+. "$OF_BASHRC"
+start=$(date +%s)
+./Allclean
+
+[ -d "constant/triSurface" ] || mkdir -p constant/triSurface
+
+# Generate the standard surfaces directly in triSurface. Empty outputs are
+# harmless: prepare_optional_regions.py detects and excludes them. Any
+# separately generated ground.obj is preserved by Allclean and picked up too.
+json_files=( *.json )
+if [ -e "${json_files[0]}" ]; then
+    python3 json_to_obj.py "${json_files[@]}" constant/triSurface
+fi
+
+
+
+
+
+surface_objs=( constant/triSurface/*.obj )
+python3 objBoundingDim.py "${surface_objs[@]}"
+# blockMesh background mesh made of cubes (dx = dy = dz): grows the box to whole cells, writes xCells/yCells/zCells
+python3 cubic_block.py --cells-across 20 || exit 1
+mv meshParameters refinementParam locationIn system/
+cp blockParameters system/.
+
+echo "  Generating ground plane OBJ..."
+# python3 gen_ground_obj.py --workers 2 > log.gen_ground_obj 2>&1
+python3 gen_ground_obj.py blockParameters --json *.json --workers 2 > log.gen_ground_obj 2>&1
+
+
+# python3 prepare_optional_regions.py
+python3 prepare_optional_regions.py --level 2 --max-level 3
+
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# fix_uinlet.py is disabled: main.py already writes the correct Cartesian
+# velocity vector; the old math_to_met() rotation was producing wrong directions
+# (e.g. 270° southward → eastward) and scientific-notation values that broke
+# the autoWindPatch.py regex.
+# python3 fix_uinlet.py
+
+python3 autoWindPatch.py
+
+export OMPI_ALLOW_RUN_AS_ROOT=1
+export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+cp -r $PWD ~/
+
+
+runApplication surfaceFeatures
+runApplication blockMesh
+python3 cubic_block.py --verify || exit 1
+runApplication decomposePar -force -copyZero
+runParallel snappyHexMesh -overwrite
+runApplication reconstructParMesh -constant -mergeTol 1e-6
+runApplication checkMesh -constant
+
+
+
+rm -r processor*
+mv log.decomposePar log.decomposeParMesh
+
+runApplication decomposePar
+runParallel $(getApplication)
+runApplication reconstructPar
+
+
+touch foam.foam
+
+# Find pvbatch — wrapper path first (handles 5.13 compat), then fallback to system pvbatch
+PVBATCH=""
+for p in \
+    ~/Softwares/paraview513/bin/pvbatch; do
+    [ -f "$p" ] && PVBATCH="$p" && break
+done
+
+# OSMesa (Docker) → call pvbatch directly with offscreen rendering
+# Dev machine     → use xvfb-run for display-based ParaView
+run_pvbatch() {
+    if [ -z "$PVBATCH" ]; then
+        echo "WARNING: pvbatch not found, skipping visualisation"
+        return 0
+    fi
+    if [ -n "$OPENFOAM_CONTAINER" ]; then
+        echo "  [container] Running pvbatch --force-offscreen-rendering $1"
+        "$PVBATCH" --force-offscreen-rendering "$@" 2>&1 | tee pvbatch_$1.log || true
+    else
+        echo "  [dev] Running xvfb-run pvbatch $1"
+        xvfb-run -a "$PVBATCH" "$@" 2>&1 | tee pvbatch_$1.log || true
+    fi
+}
+
+run_pvbatch stateFile.py
+ffmpeg -y -framerate 10 -i temporal.%04d.jpeg contour.gif 2>&1 | tee ffmpeg.log || true
+
+run_pvbatch stateFileStream.py
+
+rm temporal1.000{1..9}.jpeg
+
+for i in $(seq -w 0001 0009); do cp temporal1.0000.jpeg temporal.x.$i.jpeg; done
+
+
+ffmpeg -y -framerate 10 -i temporal1.%04d.jpeg streamlines.gif 2>/dev/null
+
+[ -z "$OPENFOAM_CONTAINER" ] && cp -r "$PWD" ~/create_caseFile_$(date +"%d%m_%H%M%S") || true
+
+rm -f temporal*.jpeg
+
+end=$(date +%s)
+runtime=$((end-start))
+echo ""
+echo "=============================================="
+echo " Simulation complete! Total runtime: $runtime seconds"
+echo "=============================================="
+
+#------------------------------------------------------------------------------

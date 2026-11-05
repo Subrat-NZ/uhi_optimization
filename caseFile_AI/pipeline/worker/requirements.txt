@@ -1,0 +1,27 @@
+# torch comes with the base image (worker/Dockerfile)
+runpod>=1.7,<2
+numpy
+# T / RH models
+opencv-python-headless
+matplotlib
+# wind model (wind_api/model: infrenace.py + turbdiff); lightning pinned to the checkpoint's version
+pytorch-lightning==2.4.0
+torchmetrics==1.4.3
+einops
+h5py
+lark
+loky
+more-itertools
+omegaconf
+POT
+pytimeparse
+cachetools
+rich
+pillow
+scipy
+pyamg>=5.2,<6
+tqdm
+wandb
+# VTK post-processing, pressure/Cp calculators, and wind model I/O
+pyvista
+vtk

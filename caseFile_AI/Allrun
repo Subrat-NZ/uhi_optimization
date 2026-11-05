@@ -1,0 +1,115 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# Allrun  --  ONE optimisation case with the AI models:  wind (U) -> T -> RH  ->  site-averaged UTCI
+#
+# Drop-in for caseFile/Allrun (the OpenFOAM case).  Called by python/run_candidates.py in  run/NAME/<season>/  (a copy of this folder), where it finds
+#     <NAME>.json          the layout (the only *.json here)
+#     date_and_time.xyz    the peak-heat or peak-cold hour
+#     ../epw/*.epw         the weather file (link made by run_candidates.py)
+# and leaves   UTCI_details.txt   (line "Site area-averaged: UTCI=xx.xx C ...") that run_candidates.py parses, plus the same result files the analysis
+# and plot scripts read from an OpenFOAM case (temperature_humidity/postProcessing/{utci.json,utci_points.csv}, temperature_humidity/weatherData/target.json,
+# temperature_humidity/surfaces/*.obj, momentum/<NAME>.json).
+#
+# Steps                                                                                          log
+#   1  weather of the hour       temperature_humidity/tools/epw_to_weather.py   (as the OpenFOAM case)   log.weather
+#   2  geometry                  momentum/: json_to_obj.py, objBoundingDim.py, cubic_block.py, gen_ground_obj.py (as the OpenFOAM case, python
+#                                only, no mesh)                                                        log.geometry
+#   3  surface temperatures      tools/run_thermal.py --stage raw (as the OpenFOAM case; runs alongside step 4)  log.thermal_raw
+#   4  AI                        ai/run_ai_case.py: wind OBJ -> wind model -> rasters -> T model -> RH model     log.ai
+#   5  UTCI                      ai/ai_utci.py: Tmrt and UTCI at the pixels of the site (same method as compute_utci.py)  log.utci
+#   6  images                    images/{U,T,RH}_z2m.png
+#
+# Environment
+#   UHI_AI_BACKEND   runpod | local | mock | auto (default, see ai/backend.py)
+#   UHI_CASE_SOURCE  the ORIGINAL case folder: pipeline/ (code + 1.2 GB of weights) is used from there instead of being copied into every candidate
+#                    (python/run_candidates.py sets it); without it, ./pipeline is used
+#   UHI_AI_RETRIES   how often step 4 is repeated after a transient failure of the model service (default 1)
+#   UHI_SPINUP_HOURS, UHI_THERMAL_SHADOW_SAMPLES   speed of the surface-temperature model (step 3), which is the slowest step of this case:
+#                    24 and 3 = exactly the OpenFOAM case (default); e.g. 12 and 1 is about 4 x faster but is NOT the same result
+#   UHI_AI_KEEP=1    keep all of ai_work/ (wind OBJ, rasters, inlets, T and RH folders); default keeps fields.npz, ai_report.json, ai.log only
+#------------------------------------------------------------------------------
+cd "${0%/*}" || exit 1
+TOP=$PWD
+PY=${PYTHON:-python3}
+die() { echo "Allrun: ERROR: $*" >&2; exit 1; }
+
+# ---- inputs --------------------------------------------------------------------------------
+n=$(ls ./*.json 2>/dev/null | wc -l)
+[ "$n" -eq 1 ] || die "need exactly one *.json next to this script, found $n"
+JSON=$(ls ./*.json)
+[ -f date_and_time.xyz ] || die "no date_and_time.xyz"
+EPW=""
+for f in ../epw/*.epw ../../epw/*.epw ../../../epw/*.epw epw/*.epw; do
+    [ -f "$f" ] && { EPW=$(readlink -f "$f"); break; }
+done
+[ -n "$EPW" ] || die "no EPW file (looked for ../epw/*.epw)"
+for d in momentum temperature_humidity surface_temperature ai; do [ -d "$d" ] || die "missing folder $d"; done
+[ -d "${UHI_CASE_SOURCE:-.}/pipeline" ] || [ -d pipeline ] || die "no pipeline/ folder (the AI models), neither in \$UHI_CASE_SOURCE nor here"
+$PY -c "import numpy, scipy, PIL, pandas, pythermalcomfort" 2>/dev/null || die "python needs numpy scipy pillow pandas pythermalcomfort ($PY)"
+start=$(date +%s)
+rm -rf ai_work images UTCI_details.txt log.* temperature_humidity/surfaces temperature_humidity/postProcessing temperature_humidity/weatherData
+
+# ---- 1 weather of the hour ---------------------------------------------------------------------
+rm -f momentum/*.json
+cp "$JSON" momentum/
+cp date_and_time.xyz momentum/
+cp date_and_time.xyz temperature_humidity/
+$PY temperature_humidity/tools/epw_to_weather.py --epw "$EPW" --date-file date_and_time.xyz --spinup-hours "${UHI_SPINUP_HOURS:-24}" \
+    --out temperature_humidity/weatherData > log.weather 2>&1 || die "epw_to_weather failed (log.weather)"
+tail -n 2 log.weather
+
+# ---- 2 geometry: the momentum case's surface scripts, without the mesh -------------------------------------
+echo "geometry ..."
+(
+    cd momentum || exit 1
+    rm -rf constant/triSurface; mkdir -p constant/triSurface
+    set -e
+    $PY json_to_obj.py ./*.json constant/triSurface
+    $PY objBoundingDim.py constant/triSurface/*.obj
+    $PY cubic_block.py --cells-across 20
+    mv meshParameters refinementParam locationIn . 2>/dev/null || true
+    $PY gen_ground_obj.py blockParameters --json ./*.json --workers 2
+) > log.geometry 2>&1 || die "geometry failed (log.geometry)"
+[ -s momentum/constant/triSurface/ground.obj ] || die "no ground.obj (log.geometry)"
+[ -s momentum/constant/triSurface/buildings_refined.obj ] || [ -s momentum/constant/triSurface/trees.obj ] || die "no buildings and no trees in the layout (log.geometry)"
+
+# ---- 3 surface temperatures (no mesh needed), in the background while the models run -----------------------------
+(
+    $PY temperature_humidity/tools/run_thermal.py --stage raw --case temperature_humidity --momentum momentum --json "$TOP/$JSON" \
+        --shadow-samples "${UHI_THERMAL_SHADOW_SAMPLES:-3}" \
+        && echo "thermal model finished ($(date +%T))"
+) > log.thermal_raw 2>&1 &
+THPID=$!
+
+# ---- 4 AI: wind -> T -> RH ----------------------------------------------------------------------------------------
+echo "AI models ..."
+tries=$(( ${UHI_AI_RETRIES:-1} + 1 )); k=0; rc=1
+while [ $k -lt $tries ]; do
+    k=$((k + 1))
+    $PY ai/run_ai_case.py --case . > log.ai 2>&1 && { rc=0; break; }
+    rc=$?
+    [ $rc -eq 4 ] && grep -qi "not configured\|weights are missing\|no model to run\|does not match the geometry\|no inlet edge" log.ai && break   # not transient
+    [ $k -lt $tries ] && { echo "AI step failed (log.ai), trying again"; cp log.ai log.ai.try$k; sleep 5; }
+done
+if [ $rc -ne 0 ]; then
+    pkill -P "$THPID" 2>/dev/null; kill "$THPID" 2>/dev/null          # the thermal model child first, then its subshell
+    die "AI models failed: $(grep -h 'ERROR' log.ai | tail -n 1 | cut -c1-300) (log.ai)"
+fi
+tail -n 3 log.ai
+
+# ---- 5 UTCI -------------------------------------------------------------------------------------------------------------
+wait "$THPID" || die "thermal model failed (log.thermal_raw)"
+tail -n 1 log.thermal_raw
+[ -f temperature_humidity/surfaces/thermal_raw.npz ] || die "no thermal_raw.npz (log.thermal_raw)"
+echo "UTCI ..."
+$PY ai/ai_utci.py --case . --json "$JSON" --out "$TOP/UTCI_details.txt" > log.utci 2>&1 || die "ai_utci failed: $(tail -n 1 log.utci | cut -c1-300) (log.utci)"
+tail -n 1 log.utci
+
+# ---- 6 images (never fatal) ---------------------------------------------------------------------------------------------
+$PY ai/ai_images.py --case . --json "$JSON" > log.images 2>&1 || echo "Allrun: note: no images (log.images)" >&2
+
+grep -q "Site area-averaged" UTCI_details.txt || die "UTCI_details.txt has no result"
+if [ -z "$UHI_AI_KEEP" ]; then        # slim the result folder: what the analysis needs stays (fields.npz, ai_report.json, ai.log, images, postProcessing)
+    rm -rf ai_work/wind.obj ai_work/wind_2d ai_work/weather ai_work/T ai_work/RH ai_work/raster2d/*_inlet.npy temperature_humidity/surfaces/raw
+fi
+echo "case finished in $(( $(date +%s) - start )) s"

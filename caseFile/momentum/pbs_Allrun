@@ -1,0 +1,62 @@
+#!/bin/bash
+set -e
+
+# Usage:
+#   ./Allrun <userID> <priority>
+#
+# Example:
+#   ./Allrun user123 high
+#   ./Allrun testuser low
+
+export PBS_EXEC=/opt/pbs
+export PATH=/opt/pbs/bin:/opt/pbs/sbin:$PATH
+
+USER_ID="$1"
+PRIORITY_LEVEL="$2"
+
+if [ -z "$USER_ID" ] || [ -z "$PRIORITY_LEVEL" ]; then
+    echo "Usage: ./Allrun <userID> <high|medium|low>"
+    exit 1
+fi
+
+case "$PRIORITY_LEVEL" in
+    high)
+        PBS_QUEUE="high"
+        PBS_PRIORITY="1000"
+        ;;
+    medium)
+        PBS_QUEUE="medium"
+        PBS_PRIORITY="500"
+        ;;
+    low)
+        PBS_QUEUE="low"
+        PBS_PRIORITY="0"
+        ;;
+    *)
+        echo "ERROR: Invalid priority: $PRIORITY_LEVEL"
+        echo "Allowed values: high, medium, low"
+        exit 1
+        ;;
+esac
+
+cd "$(dirname "$0")" || exit 1
+
+if ! command -v qsub >/dev/null 2>&1; then
+    echo "ERROR: qsub not found. PATH=$PATH"
+    echo "Check PBS installation at /opt/pbs/bin/qsub"
+    exit 1
+fi
+
+if [ ! -f "job_script.sh" ]; then
+    echo "ERROR: job_script.sh not found in $(pwd)"
+    exit 1
+fi
+
+JOB_ID=$(/opt/pbs/bin/qsub \
+    -N "$USER_ID" \
+    -q "$PBS_QUEUE" \
+    -p "$PBS_PRIORITY" \
+    -v API_USER_ID="$USER_ID",API_PRIORITY_LEVEL="$PRIORITY_LEVEL",API_PBS_QUEUE="$PBS_QUEUE",API_PBS_PRIORITY="$PBS_PRIORITY" \
+    job_script.sh)
+
+echo "$JOB_ID"

@@ -1,0 +1,129 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+#inputSyntax slash;
+#include "meshParameters"
+
+backgroundMesh
+{
+    xMin    $xMin;
+    xMax    $xMax;
+    yMin    $yMin;
+    yMax    $yMax;
+    zMin    $zMin;
+    zMax    $zMax;
+    // cell counts and grading come from meshParameters, written by cubic_block.py (cubes: dx = dy = dz)
+    xCells  $xCells;
+    yCells  $yCells;
+    zCells  $zCells;
+    zGrading $zGrading;
+}
+
+convertToMeters 1;
+
+vertices
+(
+    ($backgroundMesh/xMin $backgroundMesh/yMin $backgroundMesh/zMin) //0
+    ($backgroundMesh/xMax $backgroundMesh/yMin $backgroundMesh/zMin) //1
+    ($backgroundMesh/xMax $backgroundMesh/yMax $backgroundMesh/zMin) //2
+    ($backgroundMesh/xMin $backgroundMesh/yMax $backgroundMesh/zMin) //3
+    ($backgroundMesh/xMin $backgroundMesh/yMin $backgroundMesh/zMax) //4
+    ($backgroundMesh/xMax $backgroundMesh/yMin $backgroundMesh/zMax) //5
+    ($backgroundMesh/xMax $backgroundMesh/yMax $backgroundMesh/zMax) //6
+    ($backgroundMesh/xMin $backgroundMesh/yMax $backgroundMesh/zMax) //7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)
+    (
+        $backgroundMesh/xCells
+        $backgroundMesh/yCells
+        $backgroundMesh/zCells
+    )
+    simpleGrading (1 1 $backgroundMesh/zGrading)
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)   // East
+            (3 2 6 7)   // North
+        );
+    }
+
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 5 1)   // South
+            (0 3 7 4)   // West
+        );
+    }
+
+    top
+    {
+        type symmetry;
+        faces
+        (
+            (4 7 6 5)   // Top
+        );
+    }
+
+    ground
+    {
+        type wall;
+        faces ( (0 1 2 3) );   // Bottom
+    }
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

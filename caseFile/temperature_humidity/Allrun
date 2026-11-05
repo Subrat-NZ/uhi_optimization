@@ -1,0 +1,205 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# Allrun  --  air temperature + specific humidity on the momentum mesh
+#
+# Run AFTER the momentum case (../momentum) has finished (it needs its mesh and its
+# latest-time U, phi, nut).  Steps:
+#   1  weather window from the EPW           tools/epw_to_weather.py
+#   2  layout json -> obj -> thermal model   tools/run_thermal.py
+#      (the thermal model itself, tools/run_thermal.py --stage raw, needs NO mesh: it can run as soon as gen_ground_obj.py of the
+#       momentum case has finished, alongside meshing and simpleFoam - the top-level ../Allrun does that.  If surfaces/thermal_raw.npz exists,
+#       step 2 only binds it to the mesh (--stage bind, seconds); otherwise the whole thermal model runs here as before.)
+#   3  surface temperature -> patch faces    tools/map_surface_temperature.py  (0/T 0/q 0/qFlux)
+#   4  momentum mesh + U phi nut -> this case
+#   5  compile airTqFoam if needed, run it (serial or parallel), reconstruct
+#   6  site-averaged T, q, RH, |U| at 2 m    tools/site_average.py
+#      images of |U|, T, RH at z = 2 m         tools/plot_slice.py  ->  images/{U,T,RH}_z2m.png
+#
+# Usage:  ./Allrun [options]
+#   --momentum DIR        finished momentum case                  (default ../momentum)
+#   --json FILE           layout json                             (default: the only *.json here or in the momentum case)
+#   --epw FILE            weather file                            (default: weather.epw | ../epw/*.epw | ../../epw/*.epw)
+#   --date-file FILE      date_and_time.xyz of the run            (default: ./ | momentum case | ..)
+#   --cases FILE --season heat|cold   take the hour from <epw>_cases.json instead of date_and_time.xyz
+#   --spinup N            hours of weather simulated before the target hour (default 24)
+#   --north-deg D         model +y is D degrees clockwise from true north (default 0, or the cases file)
+#   --parallel N          run airTqFoam on N processors           (default 4; --parallel 1 = serial)
+#   --foam-bashrc FILE    OpenFOAM-8 etc/bashrc if OpenFOAM is not already loaded
+#   --latent-scale F      multiply all analytic evaporation / transpiration fluxes (default 1; 0 = no humidity sources)
+#   --skip-thermal        reuse surfaces/thermal_surfaces.npz (only the mapping, mesh and solver are redone)
+#   --no-raw              ignore surfaces/thermal_raw.npz and run the whole thermal model on the mesh ground (single pass)
+#   --python CMD          python interpreter (default python3)
+#------------------------------------------------------------------------------
+cd "${0%/*}" || exit 1
+CASE=$PWD
+
+MOM=../momentum; JSON=""; EPW="${EPW_FILE:-}"; DATEFILE=""; CASES=""; SEASON=""
+SPINUP=24; NORTH=""; NPROC=4; BASHRC=""; SKIP_THERMAL=0; PY=python3; LATENT=1; NO_RAW=0
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --momentum) MOM="$2"; shift 2;;
+        --json) JSON="$2"; shift 2;;
+        --epw) EPW="$2"; shift 2;;
+        --date-file) DATEFILE="$2"; shift 2;;
+        --cases) CASES="$2"; shift 2;;
+        --season) SEASON="$2"; shift 2;;
+        --spinup) SPINUP="$2"; shift 2;;
+        --north-deg) NORTH="$2"; shift 2;;
+        --parallel) NPROC="$2"; shift 2;;
+        --foam-bashrc) BASHRC="$2"; shift 2;;
+        --latent-scale) LATENT="$2"; shift 2;;
+        --skip-thermal) SKIP_THERMAL=1; shift;;
+        --no-raw) NO_RAW=1; shift;;
+        --python) PY="$2"; shift 2;;
+        -h|--help) sed -n '2,30p' "$0"; exit 0;;
+        *) echo "unknown option $1 (see ./Allrun --help)"; exit 1;;
+    esac
+done
+die() { echo "Allrun: ERROR: $*" >&2; exit 1; }
+MOM=$(cd "$MOM" 2>/dev/null && pwd) || die "momentum case not found (--momentum)"
+
+# ---- OpenFOAM environment ---------------------------------------------------------
+if [ -z "$WM_PROJECT_DIR" ]; then
+    for f in "$BASHRC" /opt/openfoam8/etc/bashrc "$HOME/Softwares/OpenFOAM-8/etc/bashrc" \
+             /home/subratmcd/Softwares/OpenFOAM-8/etc/bashrc /opt/openfoam8/etc/bashrc; do
+        [ -n "$f" ] && [ -f "$f" ] && { . "$f"; break; }
+    done
+fi
+[ -n "$WM_PROJECT_DIR" ] || die "OpenFOAM-8 is not loaded; source its etc/bashrc or use --foam-bashrc"
+. "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+export OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+# ---- inputs -------------------------------------------------------------------------
+if [ -z "$EPW" ]; then
+    for f in weather.epw "$MOM/weather.epw" ../epw/*.epw ../../epw/*.epw ../../../epw/*.epw; do
+        [ -f "$f" ] && { EPW="$f"; break; }
+    done
+fi
+[ -f "$EPW" ] || die "no EPW file (use --epw)"
+if [ -z "$CASES" ] && [ -z "$DATEFILE" ]; then
+    for f in date_and_time.xyz "$MOM/date_and_time.xyz" ../date_and_time.xyz; do
+        [ -f "$f" ] && { DATEFILE="$f"; break; }
+    done
+fi
+[ -n "$CASES" ] || [ -f "$DATEFILE" ] || die "no date_and_time.xyz (use --date-file, or --cases FILE --season heat|cold)"
+if [ -z "$JSON" ]; then
+    n=$(ls ./*.json 2>/dev/null | wc -l)
+    [ "$n" -eq 1 ] && JSON=$(ls ./*.json)
+fi
+
+MOMTIME=$($PY - "$MOM" <<'PY'
+import sys
+from pathlib import Path
+best = None
+for d in Path(sys.argv[1]).iterdir():
+    if d.is_dir():
+        try:
+            t = float(d.name)
+        except ValueError:
+            continue
+        if t > 0 and (d / "U").is_file() and (d / "nut").is_file() and (best is None or t > best[0]):
+            best = (t, d.name)
+print(best[1] if best else "")
+PY
+)
+[ -n "$MOMTIME" ] || die "no solved time directory with U and nut in $MOM (run the momentum case first)"
+[ -f "$MOM/constant/polyMesh/boundary" ] || die "no polyMesh in $MOM/constant"
+echo "momentum case: $MOM   latest time: $MOMTIME"
+echo "weather file : $EPW"
+
+# ---- clean ------------------------------------------------------------------------------
+rm -rf 0 processor* postProcessing VTK images log.* [1-9]* weatherData
+# the raw thermal result (thermal_raw.npz, made without the mesh while the momentum case was still running) is kept
+USE_RAW=0
+if [ "$SKIP_THERMAL" -eq 0 ]; then
+    if [ "$NO_RAW" -eq 0 ] && [ -f surfaces/thermal_raw.npz ]; then
+        USE_RAW=1
+        rm -rf surfaces/thermal_surfaces.npz surfaces/thermal_report.json surfaces/mapped_patches* surfaces/mapping_report.json
+    else
+        rm -rf surfaces
+    fi
+fi
+
+# ---- 1 weather ----------------------------------------------------------------------------
+W=(--epw "$EPW" --spinup-hours "$SPINUP" --out weatherData)
+[ -n "$NORTH" ] && W+=(--north-deg "$NORTH")
+if [ -n "$CASES" ]; then W+=(--cases "$CASES" --season "$SEASON"); else W+=(--date-file "$DATEFILE"); fi
+$PY tools/epw_to_weather.py "${W[@]}" || die "epw_to_weather failed"
+
+# ---- 2 mesh (needed by the thermal step for the ground) ------------------------------------
+mkdir -p constant 0
+rm -rf constant/polyMesh
+cp -r "$MOM/constant/polyMesh" constant/polyMesh
+rm -f constant/polyMesh/*.gz
+
+# ---- 3 thermal model ------------------------------------------------------------------------
+if [ "$SKIP_THERMAL" -eq 0 ]; then
+    T=(--case . --momentum "$MOM")
+    [ -n "$JSON" ] && T+=(--json "$JSON")
+    if [ "$USE_RAW" -eq 1 ]; then
+        echo "thermal: binding surfaces/thermal_raw.npz to the mesh"
+        $PY tools/run_thermal.py "${T[@]}" --stage bind 2>&1 | tee log.runThermal
+        if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            echo "NOTE: --stage bind failed (see log.runThermal), running the whole thermal model on the mesh instead"
+            mv log.runThermal log.runThermal.bind_failed
+            USE_RAW=0
+            rm -rf surfaces
+        fi
+    fi
+    if [ "$USE_RAW" -eq 0 ]; then
+        $PY tools/run_thermal.py "${T[@]}" 2>&1 | tee log.runThermal
+        [ "${PIPESTATUS[0]}" -eq 0 ] || die "run_thermal failed (see log.runThermal)"
+    fi
+fi
+[ -f surfaces/thermal_surfaces.npz ] || die "surfaces/thermal_surfaces.npz missing"
+
+# ---- 4 map to the patches, write 0/T 0/q 0/qFlux ----------------------------------------------
+$PY tools/map_surface_temperature.py --case . --latent-scale "$LATENT" 2>&1 | tee log.mapSurface
+[ "${PIPESTATUS[0]}" -eq 0 ] || die "map_surface_temperature failed (see log.mapSurface)"
+
+# ---- 5 frozen flow from the momentum run ----------------------------------------------------------
+for f in U phi nut; do
+    [ -f "$MOM/$MOMTIME/$f" ] && cp "$MOM/$MOMTIME/$f" 0/$f
+done
+[ -f 0/phi ] || echo "NOTE: no phi in $MOM/$MOMTIME, airTqFoam will use flux(U) (less accurate mass conservation)"
+# airTqFoam reads nut without the turbulence libraries: wall functions -> calculated (values kept)
+sed -i -E 's/\bnut[A-Za-z]*WallFunction\b/calculated/g' 0/nut
+
+# ---- 6 solver -----------------------------------------------------------------------------------------
+# (re)build airTqFoam whenever a source file is newer than the installed binary (a stale binary is never used);
+# the lock keeps several cases that start together from compiling at the same time
+mkdir -p "$FOAM_USER_APPBIN"
+BIN="$FOAM_USER_APPBIN/airTqFoam"
+stale() { [ ! -x "$BIN" ] || [ -n "$(find solver/airTqFoam -type f \( -name '*.C' -o -name '*.H' -o -name files -o -name options \) -newer "$BIN" 2>/dev/null)" ]; }
+if stale; then
+    echo "wmake airTqFoam ..."
+    ( flock 9; if stale; then wmake solver/airTqFoam > log.wmake 2>&1; fi ) 9>"$FOAM_USER_APPBIN/.airTqFoam.lock" \
+        || die "wmake failed, see log.wmake"
+    [ -x "$BIN" ] || die "wmake did not produce $BIN, see log.wmake"
+else
+    echo "airTqFoam is up to date"
+fi
+
+if [ "$NPROC" -gt 1 ]; then
+    sed -i -E "s/^numberOfSubdomains .*/numberOfSubdomains $NPROC;/" system/decomposeParDict
+    if [ "$NPROC" -eq 4 ]; then NXYZ="2 2 1"; else NXYZ="$NPROC 1 1"; fi
+    sed -i -E "s/^( *n +)\([0-9 ]+\);/\1($NXYZ);/" system/decomposeParDict
+    runApplication decomposePar -force
+    runParallel airTqFoam
+    runApplication reconstructPar -latestTime
+else
+    runApplication airTqFoam
+fi
+tail -n 12 log.airTqFoam
+
+# ---- 7 post-processing -----------------------------------------------------------------------------------
+touch case.foam
+$PY tools/site_average.py --case . --site-obj "$MOM/constant/triSurface/site_boundary_shifted.obj" 2>&1 | tee log.siteAverage
+# slice images at 2 m (|U|, T, RH); a plotting problem must never fail the case
+$PY tools/plot_slice.py --case . --out images --height 2.0 > log.plotSlice 2>&1 || echo "NOTE: slice images failed, see log.plotSlice"
+tail -n 3 log.plotSlice
+runApplication foamToVTK -latestTime -fields '(T q)' || true
+
+echo
+echo "done.  site averages: postProcessing/site_average.json   fields: $(ls -d [1-9]* 2>/dev/null | tail -1)/T  q"
+#------------------------------------------------------------------------------

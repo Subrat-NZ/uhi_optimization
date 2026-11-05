@@ -1,0 +1,150 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# Allrun  --  ONE optimisation case: wind (momentum) -> air T and q -> site-averaged UTCI
+#
+# Called by python/run_candidates.py in  run/<NAME>/<season>/  (a copy of this caseFile), where it finds
+#     <NAME>.json          the layout (the only *.json here)
+#     date_and_time.xyz    the peak-heat or peak-cold hour
+#     ../epw/*.epw         the weather file (link made by run_candidates.py)
+# and leaves   UTCI_details.txt   (line "Site area-averaged: UTCI=xx.xx C ...") that run_candidates.py parses.
+#
+# Steps
+#   1  weather of the hour -> inlet wind (speed and direction of the EPW) written into momentum/0/U
+#   2  momentum: snappyHexMesh + simpleFoam on the cores of momentum/system/decomposeParDict (4) (momentum/Allrun or of_Allrun without the videos / copies to $HOME)
+#      2b  the SURFACE TEMPERATURES (tools/run_thermal.py --stage raw, no mesh needed) start as soon as gen_ground_obj.py of the momentum
+#          script has finished and run while the momentum case is meshed and solved  (log.thermal_raw)
+#   3  temperature_humidity/Allrun : waits for the momentum case, binds the surface temperatures to the mesh, then T and q (airTqFoam on 4 cores)
+#   4  tools/compute_utci.py       : Tmrt per point (shade, sky view, surface T) and UTCI at 2 m
+#      images/ (in this folder): |U|, T and RH at z = 2 m above the ground (U_z2m.png, T_z2m.png, RH_z2m.png)
+# Logs: log.momentum, log.thermal_raw, log.temperature_humidity, log.utci (the image step logs to temperature_humidity/log.plotSlice)
+#------------------------------------------------------------------------------
+cd "${0%/*}" || exit 1
+TOP=$PWD
+PY=${PYTHON:-python3}
+NPROC=${UHI_NPROC:-4}
+die() { echo "Allrun: ERROR: $*" >&2; exit 1; }
+
+# ---- inputs --------------------------------------------------------------------------------
+n=$(ls ./*.json 2>/dev/null | wc -l)
+[ "$n" -eq 1 ] || die "need exactly one *.json next to this script, found $n"
+JSON=$(ls ./*.json)
+[ -f date_and_time.xyz ] || die "no date_and_time.xyz"
+EPW=""
+for f in ../epw/*.epw ../../epw/*.epw ../../../epw/*.epw epw/*.epw; do
+    [ -f "$f" ] && { EPW=$(readlink -f "$f"); break; }
+done
+[ -n "$EPW" ] || die "no EPW file (looked for ../epw/*.epw)"
+for d in momentum temperature_humidity surface_temperature; do [ -d "$d" ] || die "missing folder $d"; done
+
+# ---- OpenFOAM ---------------------------------------------------------------------------------
+if [ -z "$WM_PROJECT_DIR" ]; then
+    for f in /opt/openfoam8/etc/bashrc "$HOME/Softwares/OpenFOAM-8/etc/bashrc" /home/subratmcd/Softwares/OpenFOAM-8/etc/bashrc; do
+        [ -f "$f" ] && { . "$f"; break; }
+    done
+fi
+[ -n "$WM_PROJECT_DIR" ] || die "OpenFOAM-8 is not loaded"
+export OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+export OMPI_MCA_hwloc_base_binding_policy=none OMP_NUM_THREADS=1
+start=$(date +%s)
+
+# ---- 1 weather, inlet wind --------------------------------------------------------------------
+rm -f momentum/*.json
+cp "$JSON" momentum/
+cp date_and_time.xyz momentum/
+cp date_and_time.xyz temperature_humidity/
+$PY temperature_humidity/tools/epw_to_weather.py --epw "$EPW" --date-file date_and_time.xyz --spinup-hours 24 \
+    --out temperature_humidity/weatherData > log.weather 2>&1 || die "epw_to_weather failed (log.weather)"
+$PY temperature_humidity/tools/set_inlet_wind.py --target temperature_humidity/weatherData/target.json \
+    --u-file momentum/0/U >> log.weather 2>&1 || die "set_inlet_wind failed (log.weather)"
+tail -n 2 log.weather
+
+# ---- 2 momentum (the user's of_Allrun without ParaView videos and the copies to $HOME) ------------
+# the momentum script is called of_Allrun in older copies of the case and Allrun in newer ones
+OFA=momentum/of_Allrun
+[ -f "$OFA" ] || OFA=momentum/Allrun
+[ -f "$OFA" ] || die "no momentum/of_Allrun or momentum/Allrun"
+awk '/^touch foam\.foam/ {skip=1} /^end=\$\(date/ {skip=0} /^cp -r \$PWD ~\/$/ {next} !skip {print}' \
+    "$OFA" > momentum/of_Allrun_opt
+chmod +x momentum/of_Allrun_opt
+grep -q "simpleFoam\|getApplication" momentum/of_Allrun_opt || die "$OFA: the solver call was lost while removing the videos"
+grep -q "^touch foam.foam" "$OFA" || echo "Allrun: note: no 'touch foam.foam' marker in $OFA, nothing was cut" >&2
+# the surface temperatures need only the surfaces of the momentum case, not its mesh: the momentum script gets a marker file right after its
+# gen_ground_obj.py line, and the thermal model (tools/run_thermal.py --stage raw) starts when it appears and runs alongside meshing + simpleFoam
+rm -f momentum/.ground_obj_done temperature_humidity/surfaces/thermal_raw.npz temperature_humidity/surfaces/thermal_report_raw.json
+sed -i -E 's/^(python3 gen_ground_obj\.py .*)$/\1 \&\& touch .ground_obj_done/' momentum/of_Allrun_opt
+EARLY=0
+grep -q "touch .ground_obj_done" momentum/of_Allrun_opt && EARLY=1
+[ "$EARLY" -eq 1 ] || echo "Allrun: note: no gen_ground_obj.py line in $OFA, the thermal model runs after the momentum case" >&2
+echo "momentum ..."
+( cd momentum && ./of_Allrun_opt ) > log.momentum 2>&1 &
+MOMPID=$!
+THPID=""
+if [ "$EARLY" -eq 1 ]; then
+    (
+        while [ ! -f momentum/.ground_obj_done ]; do
+            kill -0 "$MOMPID" 2>/dev/null || { echo "momentum ended before gen_ground_obj.py finished: no early thermal run"; exit 1; }
+            sleep 2
+        done
+        # snapshot of the surfaces (they are only read, but the momentum script goes on working in this folder)
+        SNAP=temperature_humidity/surfaces_snapshot
+        rm -rf "$SNAP"; mkdir -p "$SNAP/constant/triSurface"
+        for f in buildings_refined trees ground lawns ponds pathways; do
+            [ -f "momentum/constant/triSurface/$f.obj" ] && cp "momentum/constant/triSurface/$f.obj" "$SNAP/constant/triSurface/"
+        done
+        echo "gen_ground_obj.py finished: thermal model starts ($(date +%T))"
+        $PY temperature_humidity/tools/run_thermal.py --stage raw --case temperature_humidity --momentum "$SNAP" --json "$TOP/$JSON" \
+            && echo "thermal model finished ($(date +%T))"
+        rm -rf "$SNAP"
+    ) > log.thermal_raw 2>&1 &
+    THPID=$!
+fi
+wait "$MOMPID" || {
+    mrc=$?
+    [ -n "$THPID" ] && { pkill -P "$THPID" 2>/dev/null; kill "$THPID" 2>/dev/null; }
+    die "momentum failed (log.momentum), exit code $mrc"
+}
+MT=$(ls -d momentum/[1-9]* 2>/dev/null | sort -V | tail -1)
+[ -n "$MT" ] && [ -f "$MT/U" ] && [ -f "$MT/nut" ] || { [ -n "$THPID" ] && { pkill -P "$THPID" 2>/dev/null; kill "$THPID" 2>/dev/null; }; die "momentum produced no result time (log.momentum)"; }
+rm -rf momentum/processor*
+# the temperature / humidity step needs the surface temperatures: wait for the thermal model if it is still running
+if [ -n "$THPID" ]; then
+    if kill -0 "$THPID" 2>/dev/null; then echo "momentum done, waiting for the thermal model (log.thermal_raw) ..."; fi
+    wait "$THPID" || echo "Allrun: note: the early thermal run failed (log.thermal_raw); temperature_humidity/Allrun repeats it on the mesh" >&2
+    tail -n 2 log.thermal_raw
+fi
+
+# ---- 3 air temperature and humidity ---------------------------------------------------------------
+echo "temperature / humidity ..."
+( cd temperature_humidity && ./Allrun --momentum ../momentum --epw "$EPW" --date-file date_and_time.xyz \
+      --parallel "$NPROC" ) > log.temperature_humidity 2>&1 || die "temperature_humidity failed (log.temperature_humidity)"
+rm -rf temperature_humidity/processor*
+
+# ---- 4 UTCI ------------------------------------------------------------------------------------------
+echo "UTCI ..."
+run_utci() {
+    $PY temperature_humidity/tools/compute_utci.py --case temperature_humidity --momentum momentum \
+       --height 2.0 --json "$JSON" --out "$TOP/UTCI_details.txt" > log.utci 2>&1
+}
+run_utci
+rc=$?
+if [ $rc -eq 3 ]; then
+    # airTqFoam diverged (T or q outside what the wall / inlet values allow): repeat it once with first-order upwind
+    # and stronger relaxation instead of feeding a garbage UTCI to the optimiser
+    echo "airTqFoam diverged (log.utci): retrying with upwind schemes"
+    cp log.utci log.utci.diverged
+    [ -d temperature_humidity/images ] && { rm -rf images.diverged; cp -r temperature_humidity/images images.diverged; }   # what the diverged field looked like
+    sed -i -E 's/(div\(phi,[Tq]\)[[:space:]]+bounded Gauss )[A-Za-z]+( [0-9.]+)?;/\1upwind;/' temperature_humidity/system/fvSchemes
+    sed -i -E 's/^([[:space:]]+[Tq][[:space:]]+)[0-9.]+;/\10.7;/' temperature_humidity/system/fvSolution
+    ( cd temperature_humidity && ./Allrun --momentum ../momentum --epw "$EPW" --date-file date_and_time.xyz \
+          --parallel "$NPROC" --skip-thermal ) > log.temperature_humidity.retry 2>&1 || die "retry failed (log.temperature_humidity.retry)"
+    rm -rf temperature_humidity/processor*
+    run_utci
+    rc=$?
+fi
+# images of |U|, T and RH at 2 m (made by temperature_humidity/Allrun) -> next to UTCI_details.txt, also when UTCI failed
+if [ -d temperature_humidity/images ]; then rm -rf images; cp -r temperature_humidity/images images; fi
+[ $rc -eq 0 ] || die "compute_utci failed (log.utci)"
+tail -n 1 log.utci
+grep -q "Site area-averaged" UTCI_details.txt || die "UTCI_details.txt has no result"
+
+echo "case finished in $(( $(date +%s) - start )) s"

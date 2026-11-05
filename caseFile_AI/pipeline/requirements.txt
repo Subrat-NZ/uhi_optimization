@@ -1,0 +1,10 @@
+# AWS host (API + CPU preparation). The models run on RunPod: worker/requirements.txt
+fastapi
+uvicorn[standard]
+python-multipart
+numpy
+scipy
+triangle
+pandas
+pvlib
+pillow

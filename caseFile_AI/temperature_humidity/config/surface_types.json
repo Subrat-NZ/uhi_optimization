@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Surface classes used by the temperature / specific-humidity case.",
+    "Everything here is an ASSUMPTION that you should replace with your own values.",
+    "'auto' for a deep temperature means the annual mean of the EPW dry-bulb.",
+    "Humidity sources are ANALYTIC (tools/humidity_sources.py): ponds and lawns as permanently wet surfaces (surface energy balance with evaporation), Penman-Monteith tree transpiration in daylight."
+  ],
+  "walls": {
+    "thickness_m": 0.23,
+    "nodes": 5,
+    "indoor_temperature_C": 24.0,
+    "indoor_h_Wm2K": 8.0
+  },
+  "ground": {
+    "default": {
+      "label": "bare ground / soil (anything not inside a pond, lawn or pathway polygon)",
+      "thermal": {
+        "conductivity": 1.5,
+        "density": 1150.0,
+        "specific_heat": 650.0,
+        "albedo": 0.2,
+        "emissivity": 0.95,
+        "depth_m": 0.23,
+        "nodes": 5,
+        "deep_temperature_C": "auto"
+      },
+      "latent_flux_mm_per_day": 0.0
+    },
+    "pathway": {
+      "label": "asphalt roads / pathways (polygons in json 'roads' + 'pathways')",
+      "thermal": {
+        "conductivity": 0.75,
+        "density": 2110.0,
+        "specific_heat": 920.0,
+        "albedo": 0.12,
+        "emissivity": 0.93,
+        "depth_m": 0.23,
+        "nodes": 5,
+        "deep_temperature_C": "auto"
+      },
+      "latent_flux_mm_per_day": 0.0
+    },
+    "lawn": {
+      "label": "wet lawn (json 'grassAreas'), always hydrated",
+      "thermal": {
+        "conductivity": 1.0,
+        "density": 1100.0,
+        "specific_heat": 1500.0,
+        "albedo": 0.25,
+        "emissivity": 0.95,
+        "depth_m": 0.23,
+        "nodes": 5,
+        "deep_temperature_C": "auto"
+      },
+      "hydration_depth_mm": 5.0,
+      "method": "wet_surface"
+    },
+    "pond": {
+      "label": "pond water surface (json 'ponds'), always wet, surface energy balance",
+      "method": "energy_balance",
+      "thermal": {
+        "conductivity": 3.0,
+        "density": 1000.0,
+        "specific_heat": 4186.0,
+        "albedo": 0.06,
+        "emissivity": 0.96,
+        "depth_m": 0.5,
+        "nodes": 5,
+        "deep_temperature_C": "auto"
+      },
+      "_note": [
+        "method: energy_balance (default) | wet_bulb (surface at the EPW thermodynamic wet-bulb temperature, no solar heating) | fixed (uses temperature_C).",
+        "thermal.conductivity is an EFFECTIVE value (water is mixed): h_g = conductivity/depth_m couples the surface to the deep water at deep_temperature_C.",
+        "albedo / emissivity set the absorbed sunlight and long-wave exchange; shading by buildings and trees is included automatically."
+      ]
+    }
+  },
+  "trees": {
+    "surface_temperature": "ambient",
+    "transpiration": {
+      "enabled": true,
+      "daytime_only": true,
+      "lai": 3.0,
+      "rs_min": 150.0,
+      "rs_max": 5000.0,
+      "rgl": 100.0,
+      "gD": 0.025,
+      "f3_min": 0.2,
+      "f4_min": 0.1,
+      "albedo": 0.2,
+      "eps": 0.97,
+      "crown_area_ratio": 0.25
+    },
+    "_note": "Big-leaf Penman-Monteith; flux is per m2 of crown surface (= LE/lambda * crown_area_ratio)."
+  },
+  "buildings": {
+    "latent_flux_mm_per_day": 0.0
+  }
+}

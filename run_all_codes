@@ -1,0 +1,36 @@
+#!/bin/bash
+
+MASSING_VENV="${MASSING_PYTHON_VENV:-$HOME/venv}"
+if [[ ! -f "$MASSING_VENV/bin/activate" ]]; then
+  echo "error: Python venv not found at $MASSING_VENV (set MASSING_PYTHON_VENV)" >&2
+  exit 1
+fi
+# shellcheck source=/dev/null
+source "$MASSING_VENV/bin/activate"
+
+mv input/constraints.json input/constraints.bak
+
+python3 python/flip_json.py input/*.json input/base.bkp > output/flip_json.log
+
+rm input/*.json
+
+mv input/base.bkp input/base.json
+
+mv input/constraints.bak input/constraints.json
+
+# UHI_OPT_ARGS: extra options of optimize.py, e.g. the AI case instead of the OpenFOAM case, confirmed by OpenFOAM at the end:
+#   UHI_OPT_ARGS="--case-file caseFile_AI --verify-case-file caseFile" ./run_all_codes      (nothing set = the OpenFOAM case, as before)
+python3 python/optimize.py --pop 7 --gens 4 --offspring 4 --pm 0.5 --case-file caseFile_AI  --retry-failed --workers 4 $UHI_OPT_ARGS > output/optimize.log
+
+python3 python/plot_utci_only.py --case run/*/*/temperature_humidity > output/plot_utci_only.log
+
+python3 python/nsga_family_video.py --input-dir input --output-dir output --out replay > output/nsga_family_video.log
+
+mkdir results
+
+cp input/top5*.json results/.
+cp replay/*.mp4 results/.
+
+python3 python/analyze_pareto.py > output/analyze_pareto.log
+
+cp -r output/analysis/figures results/analysis 

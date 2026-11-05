@@ -1,0 +1,4 @@
+#!/bin/bash
+python3 extractWeatherData.py --epw ../../epw/*.epw 
+
+python3 solar_thermal_model.py --vtk_out . --weather_dir weatherData/*/.   --buildings_obj ../momentum/constant/triSurface/buildings_refined.obj  --trees_obj ../momentum/constant/triSurface/trees.obj   --pathway_obj ../momentum/constant/triSurface/pathways.obj   --lawn_obj ../momentum/constant/triSurface/lawns.obj   --pond_obj ../momentum/constant/triSurface/ponds.obj --ground_obj ../momentum/constant/triSurface/ground.obj   --json *.json --faces_csv none --output_dir . --workers 2

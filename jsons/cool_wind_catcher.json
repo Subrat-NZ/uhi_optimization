@@ -1,0 +1,3566 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "timestamp": "2026-10-24T11:36:15.990Z",
+    "units": "m",
+    "sceneInfo": {
+      "totalBuildings": 1,
+      "totalTrees": 49,
+      "totalFootprints": 1,
+      "totalRoads": 0,
+      "totalPonds": 1,
+      "totalGrassAreas": 0,
+      "totalOSMBuildings": 0,
+      "totalOSMRoads": 0
+    }
+  },
+  "site": {
+    "coordinates": [
+      {
+        "x": -81.8389753437194,
+        "y": 53.02768781027794,
+        "z": 0
+      },
+      {
+        "x": 78.85849672837033,
+        "y": 54.76629457660579,
+        "z": 0
+      },
+      {
+        "x": 81.83897534445583,
+        "y": -53.027676293664854,
+        "z": 0
+      },
+      {
+        "x": -79.35524316340266,
+        "y": -54.76629457660579,
+        "z": 0
+      },
+      {
+        "x": -81.8389753437194,
+        "y": 53.02768781027794,
+        "z": 0
+      }
+    ],
+    "properties": {
+      "area": 17353.742758318003,
+      "perimeter": 537.5682321728048,
+      "source": "user_drawn",
+      "coordinateSystem": "3d_scene",
+      "originalCoordinates": [
+        {
+          "lat": 21.401419313593138,
+          "lng": 44.88812747320791
+        },
+        {
+          "lat": 21.40143493169201,
+          "lng": 44.88967794165008
+        },
+        {
+          "lat": 21.400466606405715,
+          "lng": 44.88970669840634
+        },
+        {
+          "lat": 21.40045098820339,
+          "lng": 44.888151437171466
+        },
+        {
+          "lat": 21.401419313593138,
+          "lng": 44.88812747320791
+        }
+      ]
+    }
+  },
+  "buildings": [
+    {
+      "id": "Building 2",
+      "height": 3,
+      "position": {
+        "x": -31.760595122861197,
+        "y": 16.681295885463157,
+        "z": 0
+      },
+      "dimensions": {
+        "height": 3,
+        "baseVertices": [
+          {
+            "x": -48.19874857052472,
+            "y": 28.73098308834277,
+            "z": 0
+          },
+          {
+            "x": -15.322441675197679,
+            "y": 28.73098308834277,
+            "z": 0
+          },
+          {
+            "x": -15.322441675197679,
+            "y": 4.6316086825835425,
+            "z": 0
+          },
+          {
+            "x": -48.19874857052472,
+            "y": 4.6316086825835425,
+            "z": 0
+          }
+        ],
+        "isHollow": false,
+        "wallThickness": 0
+      },
+      "geometry": {
+        "footprint": [
+          {
+            "x": -48.19874857052472,
+            "y": 28.73098308834277,
+            "z": 0
+          },
+          {
+            "x": -15.322441675197679,
+            "y": 28.73098308834277,
+            "z": 0
+          },
+          {
+            "x": -15.322441675197679,
+            "y": 4.6316086825835425,
+            "z": 0
+          },
+          {
+            "x": -48.19874857052472,
+            "y": 4.6316086825835425,
+            "z": 0
+          }
+        ],
+        "footprintArea": 792.2984289491302,
+        "volume": 2376.8952868473907,
+        "centroid": {
+          "x": -31.760595122861197,
+          "y": 16.681295885463157,
+          "z": 1.5
+        },
+        "height": 3
+      },
+      "faces": [
+        {
+          "id": "Building 2-bottom",
+          "vertices": [
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 0
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 0
+            }
+          ],
+          "normal": {
+            "x": 0,
+            "y": 0,
+            "z": -0.9999999999999999
+          },
+          "center": {
+            "x": -31.760595122861197,
+            "y": 16.681295885463157,
+            "z": 0
+          },
+          "surfaceType": "floor",
+          "area": 792.2984289491302,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 13882323,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.3
+            }
+          }
+        },
+        {
+          "id": "Building 2-top",
+          "vertices": [
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 3
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 3
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 3
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 3
+            }
+          ],
+          "normal": {
+            "x": 0,
+            "y": 0,
+            "z": 0.9999999999999999
+          },
+          "center": {
+            "x": -31.760595122861197,
+            "y": 16.681295885463157,
+            "z": 3
+          },
+          "surfaceType": "roof",
+          "area": 792.2984289491302,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 11591910,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.4
+            }
+          }
+        },
+        {
+          "id": "Building 2-side-0",
+          "vertices": [
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 3
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 3
+            }
+          ],
+          "normal": {
+            "x": 0,
+            "y": -1,
+            "z": 0
+          },
+          "center": {
+            "x": -31.760595122861197,
+            "y": 28.73098308834277,
+            "z": 1.5
+          },
+          "surfaceType": "wall",
+          "area": 0,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 15852200,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.3
+            }
+          }
+        },
+        {
+          "id": "Building 2-side-1",
+          "vertices": [
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 0
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 3
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 28.73098308834277,
+              "z": 3
+            }
+          ],
+          "normal": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": -15.322441675197679,
+            "y": 16.681295885463157,
+            "z": 1.5
+          },
+          "surfaceType": "wall",
+          "area": 0,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 15852200,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.3
+            }
+          }
+        },
+        {
+          "id": "Building 2-side-2",
+          "vertices": [
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 0
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 0
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 3
+            },
+            {
+              "x": -15.322441675197679,
+              "y": 4.6316086825835425,
+              "z": 3
+            }
+          ],
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "center": {
+            "x": -31.7605951228612,
+            "y": 4.6316086825835425,
+            "z": 1.5
+          },
+          "surfaceType": "wall",
+          "area": 0,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 15852200,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.3
+            }
+          }
+        },
+        {
+          "id": "Building 2-side-3",
+          "vertices": [
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 0
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 0
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 28.73098308834277,
+              "z": 3
+            },
+            {
+              "x": -48.19874857052472,
+              "y": 4.6316086825835425,
+              "z": 3
+            }
+          ],
+          "normal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": -48.19874857052472,
+            "y": 16.681295885463157,
+            "z": 1.5
+          },
+          "surfaceType": "wall",
+          "area": 0,
+          "cutouts": [],
+          "materialProperties": {
+            "color": 15852200,
+            "opacity": 1,
+            "transparent": true,
+            "roughness": 0.55,
+            "metalness": 0,
+            "emissive": 0,
+            "envMapIntensity": 0.3,
+            "thermalProperties": {
+              "thermal_conductivity": 2.3,
+              "density": 2400,
+              "specific_heat": 880,
+              "surface_roughness": 0.1,
+              "albedo": 0.3
+            }
+          }
+        }
+      ],
+      "materials": {
+        "Building 2-bottom": {
+          "color": 13882323,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        },
+        "Building 2-top": {
+          "color": 11591910,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        },
+        "Building 2-side-0": {
+          "color": 15852200,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        },
+        "Building 2-side-1": {
+          "color": 15852200,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        },
+        "Building 2-side-2": {
+          "color": 15852200,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        },
+        "Building 2-side-3": {
+          "color": 15852200,
+          "opacity": 1,
+          "transparent": true,
+          "roughness": 0.55,
+          "metalness": 0,
+          "emissive": 0,
+          "envMapIntensity": 0.3
+        }
+      },
+      "properties": {
+        "floorArea": 792.2984289491302,
+        "volume": 2376.8952868473907,
+        "perimeter": 113.95136260217254,
+        "buildingType": "generic"
+      }
+    }
+  ],
+  "trees": [
+    {
+      "id": "Tree 1",
+      "position": {
+        "x": -31.686214338030137,
+        "y": -35.385253756609245,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 2",
+      "position": {
+        "x": -25.438228412221374,
+        "y": -29.137267799560554,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 3",
+      "position": {
+        "x": -20.38033504370952,
+        "y": -22.44299713129411,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 4",
+      "position": {
+        "x": -15.024918535873452,
+        "y": -15.74872646302766,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 5",
+      "position": {
+        "x": -9.669502028037371,
+        "y": -9.649502076384893,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 6",
+      "position": {
+        "x": -3.2727545325664944,
+        "y": -3.847800830553954,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 7",
+      "position": {
+        "x": -72.00059971646284,
+        "y": -43.120855417717145,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 8",
+      "position": {
+        "x": -58.76082001653476,
+        "y": -42.22828599528162,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 9",
+      "position": {
+        "x": -50.28141054579431,
+        "y": -40.59190872081648,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 10",
+      "position": {
+        "x": -41.05819322674328,
+        "y": -38.955531446351344,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 8,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.6,
+        "crownHeight": 4.8,
+        "crownRadius": 4,
+        "totalHeight": 8,
+        "crownDiameter": 8
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 50.26548245743669,
+        "volume": 271.70168784326444
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 11",
+      "position": {
+        "x": -66.64518320862678,
+        "y": -48.029987241112536,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 12",
+      "position": {
+        "x": -53.7029266480229,
+        "y": -48.476271952330315,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 13",
+      "position": {
+        "x": -45.22351717728245,
+        "y": -46.09608682583557,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 14",
+      "position": {
+        "x": -34.95896887059663,
+        "y": -42.97209384731122,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 15",
+      "position": {
+        "x": -23.801851145938127,
+        "y": -37.1703926014803,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 16",
+      "position": {
+        "x": -17.40510365046725,
+        "y": -29.881075651590173,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 17",
+      "position": {
+        "x": -11.305879294320619,
+        "y": -22.591758701700027,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 18",
+      "position": {
+        "x": -6.396747495470875,
+        "y": -17.236342167086868,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 19",
+      "position": {
+        "x": -1.3388541269590206,
+        "y": -10.988356210038184,
+        "z": 0
+      },
+      "height": 6,
+      "crownDiameter": 6,
+      "dimensions": {
+        "trunkHeight": 2.4000000000000004,
+        "trunkRadius": 0.44999999999999996,
+        "crownHeight": 3.5999999999999996,
+        "crownRadius": 3,
+        "totalHeight": 6,
+        "crownDiameter": 6
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 28.274333882308138,
+        "volume": 114.62414955887719
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 20",
+      "position": {
+        "x": -60.397197282818006,
+        "y": -50.261410797201364,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 21",
+      "position": {
+        "x": -72.44688442544918,
+        "y": -50.261410797201364,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 22",
+      "position": {
+        "x": -75.57087738835357,
+        "y": -49.81512608598361,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 23",
+      "position": {
+        "x": -65.60385222099198,
+        "y": -43.41837855852899,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 24",
+      "position": {
+        "x": -40.31438537843271,
+        "y": -44.608471121776354,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 25",
+      "position": {
+        "x": -64.79609698938864,
+        "y": -52.569717928634304,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 26",
+      "position": {
+        "x": -47.88724701926517,
+        "y": -50.739248319886016,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 27",
+      "position": {
+        "x": -24.071393672777283,
+        "y": -41.9573879104519,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 28",
+      "position": {
+        "x": -27.468443281103827,
+        "y": -43.11729455182745,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 29",
+      "position": {
+        "x": -15.879561055401908,
+        "y": -35.96783643323832,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 30",
+      "position": {
+        "x": -18.776396521374174,
+        "y": -38.35699417253037,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 31",
+      "position": {
+        "x": -13.191396187287733,
+        "y": -31.982560429135326,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 32",
+      "position": {
+        "x": -10.266468061477266,
+        "y": -27.957210363253942,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 33",
+      "position": {
+        "x": -5.060686018453591,
+        "y": -21.989964535551852,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 34",
+      "position": {
+        "x": 6.953432528960473,
+        "y": -3.351766395910076,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 35",
+      "position": {
+        "x": 2.0676440929311424,
+        "y": -7.5323827048794145,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 36",
+      "position": {
+        "x": 2.9537772756159177,
+        "y": -1.5826313056757417,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 37",
+      "position": {
+        "x": -2.447415456938903,
+        "y": 2.0462950796541586,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 38",
+      "position": {
+        "x": 0.8861331826847753,
+        "y": 1.286752347840924,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 39",
+      "position": {
+        "x": 4.5994531863162145,
+        "y": -5.380344964741912,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 40",
+      "position": {
+        "x": -1.0886749336800507,
+        "y": -15.885902704595622,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 41",
+      "position": {
+        "x": -30.198598641408985,
+        "y": -44.9051464677693,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 42",
+      "position": {
+        "x": -35.702776718907174,
+        "y": -47.73161630548179,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 43",
+      "position": {
+        "x": -41.95076264471594,
+        "y": -50.40932457278837,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 44",
+      "position": {
+        "x": -38.97553125147367,
+        "y": -48.47542415751141,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 45",
+      "position": {
+        "x": -51.17397996376696,
+        "y": -52.78950969928311,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 46",
+      "position": {
+        "x": -57.86825059856204,
+        "y": -53.384555980906796,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 47",
+      "position": {
+        "x": -54.29797292667132,
+        "y": -53.384555980906796,
+        "z": 0
+      },
+      "height": 3,
+      "crownDiameter": 3,
+      "dimensions": {
+        "trunkHeight": 1.2000000000000002,
+        "trunkRadius": 0.22499999999999998,
+        "crownHeight": 1.7999999999999998,
+        "crownRadius": 1.5,
+        "totalHeight": 3,
+        "crownDiameter": 3
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 7.0685834705770345,
+        "volume": 14.328018694859649
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 2.5,
+          "height": 5,
+          "crown_diameter": 3,
+          "transpiration_rate": 0.4,
+          "canopy_density": 0.6
+        }
+      }
+    },
+    {
+      "id": "Tree 49",
+      "position": {
+        "x": -79.91032089041744,
+        "y": -42.183735020888264,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 4,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.3,
+        "crownHeight": 4.8,
+        "crownRadius": 2,
+        "totalHeight": 8,
+        "crownDiameter": 4
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 12.566370614359172,
+        "volume": 34.415100322524985
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    },
+    {
+      "id": "Tree 50",
+      "position": {
+        "x": -79.23179112704894,
+        "y": -46.70117138846841,
+        "z": 0
+      },
+      "height": 8,
+      "crownDiameter": 4,
+      "dimensions": {
+        "trunkHeight": 3.2,
+        "trunkRadius": 0.3,
+        "crownHeight": 4.8,
+        "crownRadius": 2,
+        "totalHeight": 8,
+        "crownDiameter": 4
+      },
+      "properties": {
+        "species": "Generic Tree",
+        "maturity": "Mature",
+        "shadingArea": 12.566370614359172,
+        "volume": 34.415100322524985
+      },
+      "materials": {
+        "trunk": {
+          "color": 9127187,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.8,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "crown": {
+          "color": 7048739,
+          "opacity": 1,
+          "transparent": false,
+          "roughness": 0.9,
+          "metalness": 0,
+          "emissive": 0
+        },
+        "vegetation": {
+          "leaf_area_index": 4,
+          "height": 8,
+          "crown_diameter": 6,
+          "transpiration_rate": 0.6,
+          "canopy_density": 0.8
+        }
+      }
+    }
+  ],
+  "footprints": [
+    {
+      "id": "shape_fp_Building 2",
+      "vertices": [
+        {
+          "x": -48.19874857052472,
+          "y": -28.73098308834277
+        },
+        {
+          "x": -15.322441675197679,
+          "y": -28.73098308834277
+        },
+        {
+          "x": -15.322441675197679,
+          "y": -4.6316086825835425
+        },
+        {
+          "x": -48.19874857052472,
+          "y": -4.6316086825835425
+        }
+      ],
+      "elevation": 0,
+      "area": 792.2984289491302,
+      "perimeter": 113.95136260217254,
+      "isSelected": false,
+      "fromShape": true
+    }
+  ],
+  "roads": [],
+  "ponds": [
+    {
+      "id": "pond_1792841589141",
+      "coordinates": [
+        {
+          "x": -13.091018130265978,
+          "y": -4.294085541771728
+        },
+        {
+          "x": -13.521950927118583,
+          "y": -4.8599177080503955
+        },
+        {
+          "x": -13.878683745081169,
+          "y": -5.540205450718205
+        },
+        {
+          "x": -14.189883877499128,
+          "y": -6.31111544938818
+        },
+        {
+          "x": -14.484218617717849,
+          "y": -7.1488143836733435
+        },
+        {
+          "x": -14.790355259082734,
+          "y": -8.029468933186717
+        },
+        {
+          "x": -15.136961094939164,
+          "y": -8.929245777541325
+        },
+        {
+          "x": -15.552703418632538,
+          "y": -9.82431159635019
+        },
+        {
+          "x": -16.066249523508247,
+          "y": -10.69083306922634
+        },
+        {
+          "x": -16.97981982742701,
+          "y": -11.885368665248624
+        },
+        {
+          "x": -18.07175954041069,
+          "y": -13.087488303685374
+        },
+        {
+          "x": -19.295043593581955,
+          "y": -14.306047527433469
+        },
+        {
+          "x": -20.602646918063474,
+          "y": -15.549901879389788
+        },
+        {
+          "x": -21.947544444977925,
+          "y": -16.827906902451215
+        },
+        {
+          "x": -23.28271110544798,
+          "y": -18.148918139514617
+        },
+        {
+          "x": -24.561121830596313,
+          "y": -19.521791133476885
+        },
+        {
+          "x": -25.7357515515456,
+          "y": -20.955381427234894
+        },
+        {
+          "x": -26.882696912611202,
+          "y": -22.732932319353864
+        },
+        {
+          "x": -27.91550117684463,
+          "y": -24.755193944152598
+        },
+        {
+          "x": -28.884116494832323,
+          "y": -26.90886429838468
+        },
+        {
+          "x": -29.838495017160728,
+          "y": -29.08064137880371
+        },
+        {
+          "x": -30.82858889441629,
+          "y": -31.15722318216328
+        },
+        {
+          "x": -31.904350277185436,
+          "y": -33.025307705216974
+        },
+        {
+          "x": -33.11573131605463,
+          "y": -34.57159294471838
+        },
+        {
+          "x": -34.51268416161029,
+          "y": -35.6827768974211
+        },
+        {
+          "x": -35.88198123365704,
+          "y": -36.25210893581773
+        },
+        {
+          "x": -37.35973785288217,
+          "y": -36.519346423228384
+        },
+        {
+          "x": -38.92722210255776,
+          "y": -36.554203486803694
+        },
+        {
+          "x": -40.56570206595584,
+          "y": -36.42639425369425
+        },
+        {
+          "x": -42.25644582634848,
+          "y": -36.205632851050645
+        },
+        {
+          "x": -43.9807214670077,
+          "y": -35.96163340602353
+        },
+        {
+          "x": -45.71979707120557,
+          "y": -35.76411004576347
+        },
+        {
+          "x": -47.454940722214154,
+          "y": -35.6827768974211
+        },
+        {
+          "x": -49.52449459379236,
+          "y": -35.77353684905824
+        },
+        {
+          "x": -51.73673288574112,
+          "y": -35.99395387446273
+        },
+        {
+          "x": -54.027498887318984,
+          "y": -36.26623372937416
+        },
+        {
+          "x": -56.33263588778454,
+          "y": -36.512582169532116
+        },
+        {
+          "x": -58.58798717639635,
+          "y": -36.6552049506762
+        },
+        {
+          "x": -60.729396042412986,
+          "y": -36.616307828546
+        },
+        {
+          "x": -62.69270577509304,
+          "y": -36.318096558881095
+        },
+        {
+          "x": -64.41375966369507,
+          "y": -35.6827768974211
+        },
+        {
+          "x": -65.81768333989584,
+          "y": -34.78879645127543
+        },
+        {
+          "x": -67.15349598693042,
+          "y": -33.64254199485414
+        },
+        {
+          "x": -68.39548479406918,
+          "y": -32.29331486629344
+        },
+        {
+          "x": -69.5179369505824,
+          "y": -30.79041640372949
+        },
+        {
+          "x": -70.49513964574047,
+          "y": -29.183147945298497
+        },
+        {
+          "x": -71.30138006881373,
+          "y": -27.52081082913665
+        },
+        {
+          "x": -71.91094540907247,
+          "y": -25.852706393380142
+        },
+        {
+          "x": -72.29812285578707,
+          "y": -24.228135976165166
+        },
+        {
+          "x": -72.44941813461892,
+          "y": -22.466920800538464
+        },
+        {
+          "x": -72.36269815073322,
+          "y": -20.54093165716287
+        },
+        {
+          "x": -72.06363259599713,
+          "y": -18.523824949649136
+        },
+        {
+          "x": -71.57789116227778,
+          "y": -16.48925708160802
+        },
+        {
+          "x": -70.93114354144225,
+          "y": -14.510884456650283
+        },
+        {
+          "x": -70.14905942535769,
+          "y": -12.662363478386679
+        },
+        {
+          "x": -69.25730850589126,
+          "y": -11.017350550427961
+        },
+        {
+          "x": -68.28156047491002,
+          "y": -9.649502076384893
+        },
+        {
+          "x": -67.36204416171827,
+          "y": -8.708110968838792
+        },
+        {
+          "x": -66.316734101744,
+          "y": -7.901691808952946
+        },
+        {
+          "x": -65.16721696261949,
+          "y": -7.214892911786261
+        },
+        {
+          "x": -63.93507941197698,
+          "y": -6.632362592397615
+        },
+        {
+          "x": -62.64190811744877,
+          "y": -6.138749165845909
+        },
+        {
+          "x": -61.30928974666712,
+          "y": -5.718700947190027
+        },
+        {
+          "x": -59.95881096726431,
+          "y": -5.35686625148887
+        },
+        {
+          "x": -58.612058446872645,
+          "y": -5.037893393801331
+        },
+        {
+          "x": -57.108823930237676,
+          "y": -4.7970509753340576
+        },
+        {
+          "x": -55.559327802562485,
+          "y": -4.714003009736836
+        },
+        {
+          "x": -53.967680476560304,
+          "y": -4.744258330355679
+        },
+        {
+          "x": -52.33799236494431,
+          "y": -4.8433257705366
+        },
+        {
+          "x": -50.67437388042775,
+          "y": -4.966714163625613
+        },
+        {
+          "x": -48.98093543572382,
+          "y": -5.06993234296873
+        },
+        {
+          "x": -47.26178744354572,
+          "y": -5.1084891419119645
+        },
+        {
+          "x": -45.52104031660668,
+          "y": -5.037893393801331
+        },
+        {
+          "x": -43.441439145307996,
+          "y": -4.851782307905054
+        },
+        {
+          "x": -41.29375800299002,
+          "y": -4.619302209637969
+        },
+        {
+          "x": -39.095660877845624,
+          "y": -4.339752227497223
+        },
+        {
+          "x": -36.86481175806765,
+          "y": -4.012431489979968
+        },
+        {
+          "x": -34.61887463184898,
+          "y": -3.636639125583351
+        },
+        {
+          "x": -32.375513487382456,
+          "y": -3.2116742628045234
+        },
+        {
+          "x": -30.152392312860943,
+          "y": -2.736836030140635
+        },
+        {
+          "x": -27.967175096477302,
+          "y": -2.2114235560888353
+        },
+        {
+          "x": -25.71285493617481,
+          "y": -1.5007571217722022
+        },
+        {
+          "x": -23.371843446581735,
+          "y": -0.5588512407674511
+        },
+        {
+          "x": -21.001383063800777,
+          "y": 0.5060653084404613
+        },
+        {
+          "x": -18.65871622393463,
+          "y": 1.5857637473665775
+        },
+        {
+          "x": -16.401085363085997,
+          "y": 2.5720152975259403
+        },
+        {
+          "x": -14.285732917357576,
+          "y": 3.3565911804335933
+        },
+        {
+          "x": -12.369901322852067,
+          "y": 3.831262617604578
+        },
+        {
+          "x": -10.710833015672165,
+          "y": 3.88780083055394
+        },
+        {
+          "x": -9.794057736100642,
+          "y": 3.6950958107644385
+        },
+        {
+          "x": -8.864397252136241,
+          "y": 3.3629888342324143
+        },
+        {
+          "x": -7.96362962541711,
+          "y": 2.9249552091250917
+        },
+        {
+          "x": -7.133532917581412,
+          "y": 2.4144702436096943
+        },
+        {
+          "x": -6.4158851902673035,
+          "y": 1.865009245853446
+        },
+        {
+          "x": -5.85246450511294,
+          "y": 1.3100475240235705
+        },
+        {
+          "x": -5.48504892375648,
+          "y": 0.7830603862872918
+        },
+        {
+          "x": -5.3554165078360825,
+          "y": 0.3175231408118332
+        },
+        {
+          "x": -5.498196305346187,
+          "y": -0.07624163986678986
+        },
+        {
+          "x": -5.881710534769554,
+          "y": -0.47229156803245836
+        },
+        {
+          "x": -6.447545020853922,
+          "y": -0.8663610907039611
+        },
+        {
+          "x": -7.137285588347029,
+          "y": -1.2541846549000866
+        },
+        {
+          "x": -7.89251806199661,
+          "y": -1.6314967076396238
+        },
+        {
+          "x": -8.654828266550409,
+          "y": -1.994031695941361
+        },
+        {
+          "x": -9.365802026756157,
+          "y": -2.337524066824088
+        },
+        {
+          "x": -9.967025167361598,
+          "y": -2.6577082673065933
+        },
+        {
+          "x": -10.387692799103315,
+          "y": -2.877789874352832
+        },
+        {
+          "x": -10.803673484412446,
+          "y": -3.0576072451248097
+        },
+        {
+          "x": -11.21300090916547,
+          "y": -3.2150732909399284
+        },
+        {
+          "x": -11.613708759238875,
+          "y": -3.3681009231155907
+        },
+        {
+          "x": -12.003830720509145,
+          "y": -3.534603052969199
+        },
+        {
+          "x": -12.381400478852761,
+          "y": -3.732492591818157
+        },
+        {
+          "x": -12.74445172014621,
+          "y": -3.9796824509798645
+        },
+        {
+          "x": -13.091018130265978,
+          "y": -4.294085541771728
+        }
+      ],
+      "dimensions": {
+        "area": 1563.948438241251,
+        "depth": 2,
+        "volume": 3127.896876482502
+      },
+      "material": {
+        "thermal_conductivity": 0.6,
+        "density": 1000,
+        "specific_heat": 4186,
+        "surface_roughness": 0.0001,
+        "albedo": 0.06
+      },
+      "elevation": 0
+    }
+  ],
+  "grassAreas": [],
+  "osmBuildings": [],
+  "osm_buildings": [],
+  "osmRoads": [],
+  "dxfEntities": [],
+  "groups": {
+    "buildingGroups": [],
+    "treeGroups": [
+      {
+        "id": "tree-group-1",
+        "treeIds": [
+          "Tree 1",
+          "Tree 2",
+          "Tree 3",
+          "Tree 4",
+          "Tree 5",
+          "Tree 6",
+          "Tree 7",
+          "Tree 8",
+          "Tree 9",
+          "Tree 10",
+          "Tree 11",
+          "Tree 12",
+          "Tree 13",
+          "Tree 14",
+          "Tree 15",
+          "Tree 16",
+          "Tree 17",
+          "Tree 18",
+          "Tree 19",
+          "Tree 20",
+          "Tree 21",
+          "Tree 22",
+          "Tree 23",
+          "Tree 24",
+          "Tree 25",
+          "Tree 26",
+          "Tree 27",
+          "Tree 28",
+          "Tree 29",
+          "Tree 30",
+          "Tree 31",
+          "Tree 32",
+          "Tree 33",
+          "Tree 34",
+          "Tree 35",
+          "Tree 36",
+          "Tree 37",
+          "Tree 38",
+          "Tree 39",
+          "Tree 40",
+          "Tree 41",
+          "Tree 42",
+          "Tree 43",
+          "Tree 44",
+          "Tree 45",
+          "Tree 46",
+          "Tree 47",
+          "Tree 48"
+        ],
+        "boundingBox": {
+          "min": {
+            "x": -75.57087738835357,
+            "y": 0,
+            "z": -2.0462950796541586
+          },
+          "max": {
+            "x": 6.953432528960473,
+            "y": 0,
+            "z": 53.384555980906796
+          },
+          "center": {
+            "x": -34.308722429696545,
+            "y": 0,
+            "z": 25.66913045062632
+          },
+          "size": {
+            "x": 82.52430991731404,
+            "y": 0,
+            "z": 55.430851060560954
+          }
+        }
+      },
+      {
+        "id": "tree-group-2",
+        "treeIds": [
+          "Tree 49",
+          "Tree 50"
+        ],
+        "boundingBox": {
+          "min": {
+            "x": -79.91032089041744,
+            "y": 0,
+            "z": 42.183735020888264
+          },
+          "max": {
+            "x": -79.23179112704894,
+            "y": 0,
+            "z": 46.70117138846841
+          },
+          "center": {
+            "x": -79.5710560087332,
+            "y": 0,
+            "z": 44.44245320467834
+          },
+          "size": {
+            "x": 0.6785297633685019,
+            "y": 0,
+            "z": 4.517436367580146
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "units": {
+      "name": "Meters",
+      "abbreviation": "m",
+      "gridSize": 1,
+      "defaultBuildingHeight": 3,
+      "conversionToMeters": 1
+    },
+    "shadowSettings": {
+      "month": 6,
+      "date": 21,
+      "time": 12,
+      "latitude": 21.40094296077548,
+      "longitude": 44.88891708580713
+    }
+  }
+}

@@ -1,0 +1,3 @@
+#!/bin/bash
+cd "${0%/*}" || exit 1
+rm -rf 0 processor* postProcessing VTK images log.* [1-9]* weatherData surfaces constant/polyMesh constant/transportProperties case.foam
